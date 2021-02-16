@@ -1,4 +1,11 @@
 class UsersController < ApplicationController
+  def index
+  end
+
+  def login
+    redirect_to edit_user_path(id: params[:username])
+  end
+
   def edit
     @user = User.find_or_create_by(username: params[:id])
   end
