@@ -1,0 +1,5 @@
+<%= form_with url: "/login", method: :get do |form| %>
+  <%= form.label :username, "Username:" %>
+  <%= form.text_field :username %>
+  <%= form.submit "Login" %>
+<% end %>
