@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :groups
   root 'home#index'
   resources :users
   get '/login', to:'users#login'
