@@ -1,0 +1,9 @@
+<%= form_with url: "/groups", method: :post do |form| %>
+  <%= form.label :group_name, "Group Name:" %>
+  <%= form.text_field :group_name %>
+
+  <%= form.label :max_member_count, "Max Number:" %>
+  <%= form.number_field :max_member_count %>
+
+  <%= form.submit "Create Group" %>
+<% end %>
