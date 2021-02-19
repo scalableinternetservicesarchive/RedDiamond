@@ -1,0 +1,10 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Current Group: <%= @group.group_name%></h1>
+<h2>Group ID: <%= @group.id%></h2>
+<h2>Max Number: <%= @group.max_member_count%></h2>
+<h2>Current Number: <%= @group.current_member_count%></h2>
+<h2>Description: <%= @group.description%></h2>
+<h2>Activity: <%= @group.activity%></h2>
+<%= link_to 'Edit', edit_group_path(@group) %> |
+<%= link_to 'Back', groups_path %>

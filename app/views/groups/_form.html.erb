@@ -1,0 +1,42 @@
+<%= form_with(model: group) do |form| %>
+  <% if group.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(group.errors.count, "error") %> prohibited this group from being saved:</h2>
+
+      <ul>
+        <% group.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :group_name, "Group Name:" %>
+    <%= form.text_field :group_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :max_member_count, "Max Number:" %>
+    <%= form.number_field :max_member_count, min: 0 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :current_member_count, "Current Number:" %>
+    <%= form.number_field :current_member_count, min: 1 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description, "Description:" %>
+    <%= form.text_field :description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :activity, "Activity:" %>
+    <%= form.text_field :activity %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
