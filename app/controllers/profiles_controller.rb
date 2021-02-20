@@ -1,9 +1,9 @@
-class UsersController < ApplicationController
+class ProfilesController < ApplicationController
   def index
   end
 
   def login
-    redirect_to edit_user_path(id: params[:username])
+    redirect_to edit_profile_path(id: params[:username])
   end
 
   def edit
@@ -15,7 +15,7 @@ class UsersController < ApplicationController
 
     @user.update(user_params)
 
-    redirect_to edit_user_path(id: @user.username)
+    redirect_to edit_profile_path(id: @user.username)
   end
 
   private
