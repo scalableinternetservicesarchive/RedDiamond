@@ -3,7 +3,8 @@ class GroupsController < ApplicationController
 
   # GET /groups or /groups.json
   def index
-    @groups = Group.all
+    @game = Game.find(params[:game_id])
+    @groups = Group.where(game_id: params[:game_id])
   end
 
   # GET /groups/1 or /groups/1.json

@@ -12,7 +12,9 @@
   <tbody>
     <% @groups.each do |group| %>
       <tr>
-        <td><%= link_to 'Edit', edit_game_group_path(group) %></td>
+        <td><%= group.group_name %></td>
+        <td><%= link_to 'Show', game_group_path(@game, group) %></td>
+        <td><%= link_to 'Edit', edit_game_group_path(@game, group) %></td>
       </tr>
     <% end %>
   </tbody>
