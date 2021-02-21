@@ -2,7 +2,6 @@ Rails.application.routes.draw do
   devise_for :users
   resources :groups
   root 'home#index'
-  resources :profiles, path: '/profile'
-  get '/login', to:'users#login'
+  resources :profiles, path: '/profile', param: :username
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

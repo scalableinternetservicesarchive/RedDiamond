@@ -1,0 +1,12 @@
+<div>
+  Username: <%= @user.username %>
+</div>
+
+<% if @editable %>
+  <%= link_to 'edit', edit_profile_path(@user) %>
+<% end %>
+
+<p>
+  <%= @user.bio %>
+</p>
+

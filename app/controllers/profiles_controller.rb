@@ -1,21 +1,34 @@
 class ProfilesController < ApplicationController
-  def index
-  end
+  def show
+    @user = User.find_by_username(params[:username])
+    return not_found unless @user
 
-  def login
-    redirect_to edit_profile_path(id: params[:username])
+    @editable = true if current_user == @user
   end
 
   def edit
-    @user = User.find_or_create_by(username: params[:id])
+    authenticate_user!
+
+    @user = User.find_by_username(params[:username])
+    return not_found unless @user
+
+    redirect_to profile_path(@user) unless current_user == @user
   end
 
   def update
-    @user = User.find(params[:id])
+    authenticate_user!
 
-    @user.update(user_params)
+    @user = User.find_by_username(params[:username])
+    return not_found unless @user
 
-    redirect_to edit_profile_path(id: @user.username)
+    return redirect_to profile_path(@user), alert: "You cannot edit another user's profile!" unless current_user == @user
+
+    if @user.update(user_params)
+      redirect_to profile_path(@user)
+    else
+      render :edit
+    end
+
   end
 
   private
