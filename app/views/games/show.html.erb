@@ -7,5 +7,10 @@
 </p>
 
 
+<%= link_to 'Groups', "/games/#{@game.id}/groups"%>
+<%# <h2>Groups:</h2> %>
+<%#= render @game.groups  %>
+
 <%= link_to 'Edit', edit_game_path(@game) %> |
 <%= link_to 'Back', games_path %>
+

@@ -21,6 +21,7 @@ class GroupsController < ApplicationController
 
   # POST /groups or /groups.json
   def create
+
     @group = Group.new(group_params)
 
     respond_to do |format|
@@ -64,6 +65,6 @@ class GroupsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def group_params
-      params.require(:group).permit(:group_name, :activity, :description, :leader_name, :game_name, :max_member_count, :current_member_count)
+      params.require(:group).permit(:group_name, :activity, :description, :leader_name, :max_member_count, :current_member_count, :game_id)
     end
 end

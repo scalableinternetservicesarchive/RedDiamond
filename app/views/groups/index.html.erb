@@ -12,14 +12,10 @@
   <tbody>
     <% @groups.each do |group| %>
       <tr>
-        <td><%= link_to group.group_name, group %></td>
-        <td><%= link_to 'Edit', edit_group_path(group) %></td>
-        <td><%= link_to 'Delete', group, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Edit', edit_game_group_path(group) %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-
-<%= link_to 'New Group', new_group_path %>
