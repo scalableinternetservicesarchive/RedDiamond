@@ -10,3 +10,27 @@
   <%= @user.bio %>
 </p>
 
+<%= form_with model: [@user, Comment.new], url: profile_comments_path(@user) do |form| %>
+  <div>
+    <h2>Add comment</h2>
+  </div>
+
+  <div>
+    <%= form.label :body %><br>
+    <%= form.text_area :body %><br>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
+
+<% @user.comments.each do |comment| %>
+  <div>
+    <div><%= comment.commenter.username %></div>
+    <div><%= comment.body %></div>
+  </div>
+<% end %>
+
+
+
