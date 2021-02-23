@@ -12,9 +12,10 @@
   <tbody>
     <% @groups.each do |group| %>
       <tr>
-        <td><%= link_to group.group_name, group %></td>
-        <td><%= link_to 'Edit', edit_group_path(group) %></td>
-        <td><%= link_to 'Delete', group, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= group.group_name %></td>
+        <td><%= link_to 'Show', game_group_path(@game, group) %></td>
+        <td><%= link_to 'Edit', edit_game_group_path(@game, group) %></td>
+        <td><%= link_to 'Destroy', game_group_path(@game, group), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -22,4 +23,4 @@
 
 <br>
 
-<%= link_to 'New Group', new_group_path %>
+<%= link_to 'New Group', new_game_group_path(@game) %>
