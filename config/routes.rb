@@ -2,6 +2,9 @@ Rails.application.routes.draw do
   resources :games do
     resources :groups
   end
+  resources :home do
+    post "select_game"
+  end
   devise_for :users
   root 'home#index'
   resources :profiles, path: '/profile', param: :username

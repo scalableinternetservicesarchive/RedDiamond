@@ -4,4 +4,9 @@
 <% else %>
   <%= link_to "login", new_user_session_path %>
 <% end %>
-<h1><%= link_to "Games", "/games" %></h1>
+<br><br>
+<label for="games">Games List</label>
+<%=form_tag('/home/0/select_game') do %>
+  <%= select_tag(:game, options_for_select(@games.map{ |i| i.name })) %>
+  <%= submit_tag "Select" %>
+<% end %>
