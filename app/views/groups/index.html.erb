@@ -15,6 +15,7 @@
         <td><%= group.group_name %></td>
         <td><%= link_to 'Show', game_group_path(@game, group) %></td>
         <td><%= link_to 'Edit', edit_game_group_path(@game, group) %></td>
+        <td><%= link_to 'Destroy', game_group_path(@game, group), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
