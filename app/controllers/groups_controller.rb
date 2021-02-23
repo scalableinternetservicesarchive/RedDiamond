@@ -9,6 +9,7 @@ class GroupsController < ApplicationController
 
   # GET /groups/1 or /groups/1.json
   def show
+    @game = Game.find(params[:game_id])
   end
 
   # GET /groups/new
@@ -42,7 +43,9 @@ class GroupsController < ApplicationController
   def update
     @game = @group.game
     respond_to do |format|
-      if @group.update(group_params)
+      if group_params[:current_member_count] > group_params[:max_member_count] && group_params[:group_name].nil?
+        format.html { redirect_to game_group_url(@game, @group), notice: "You cannot join a full group!" }
+      elsif @group.update(group_params)
         format.html { redirect_to game_group_url(@game, @group), notice: "Group was successfully updated." }
         format.json { render :show, status: :ok, location: @group }
       else
