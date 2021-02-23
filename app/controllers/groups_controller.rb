@@ -13,21 +13,24 @@ class GroupsController < ApplicationController
 
   # GET /groups/new
   def new
+    @game = Game.find(params[:game_id])
     @group = Group.new
   end
 
   # GET /groups/1/edit
   def edit
+    @game = Game.find(params[:game_id])
+    @group = @game.groups.find(params[:id])
   end
 
   # POST /groups or /groups.json
   def create
-
-    @group = Group.new(group_params)
+    @game = Game.find(params[:game_id])
+    @group = @game.groups.create(group_params)
 
     respond_to do |format|
       if @group.save
-        format.html { redirect_to @group, notice: "Group was successfully created." }
+        format.html { redirect_to game_group_url(@game, @group), notice: "Group was successfully created." }
         format.json { render :show, status: :created, location: @group }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -66,6 +69,6 @@ class GroupsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def group_params
-      params.require(:group).permit(:group_name, :activity, :description, :leader_name, :max_member_count, :current_member_count, :game_id)
+      params.require(:group).permit(:group_name, :activity, :description, :leader_name, :max_member_count, :current_member_count)
     end
 end
