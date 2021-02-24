@@ -7,14 +7,16 @@
 <h2>Description: <%= @group.description%></h2>
 <h2>Activity: <%= @group.activity%></h2>
 <h2>Game: <%= @game.name%></h2>
-<%= form_with model: [@game, @group] do |form| %>
-  <div class="actions">
-    <div class="field">
-      <%= form.hidden_field :current_member_count, :value=>@group.current_member_count + 1 %>
-      <%= form.hidden_field :max_member_count %>
+<% if @group.current_member_count != nil %>
+  <%= form_with model: [@game, @group] do |form| %>
+    <div class="actions">
+      <div class="field">
+        <%= form.hidden_field :current_member_count, :value=>@group.current_member_count + 1 %>
+        <%= form.hidden_field :max_member_count %>
+      </div>
+      <%= form.submit "Join"%>
     </div>
-    <%= form.submit "Join"%>
-  </div>
+  <% end %>
 <% end %>
 <%= link_to 'Edit', edit_game_group_path(@group) %> |
 <%= link_to 'Back', game_groups_path(@game) %>
