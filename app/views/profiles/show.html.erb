@@ -1,12 +1,18 @@
-<div>
+<h1>
   Username: <%= @user.username %>
-</div>
-
+</h1>
+<p>
+  Bio: <%= @user.bio %>
+</p>
 <% if @editable %>
   <%= link_to 'edit', edit_profile_path(@user) %>
 <% end %>
 
-<p>
-  <%= @user.bio %>
-</p>
+<h2>Add a comment:</h2>
+<%= render 'comments/form' %>
+
+<h2>Comments</h2>
+<%= render @user.comments %>
+
+
 
