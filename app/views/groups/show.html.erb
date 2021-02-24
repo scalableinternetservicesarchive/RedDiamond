@@ -6,5 +6,12 @@
 <h2>Current Number: <%= @group.current_member_count%></h2>
 <h2>Description: <%= @group.description%></h2>
 <h2>Activity: <%= @group.activity%></h2>
+<h2>Game: <%= @game.name%></h2>
+<% if @group.current_member_count != nil %>
+  <%= form_with model: [@game, @group], remote: true do |form| %>
+    <%= form.hidden_field :join, :value=>true %>
+    <%= form.submit "Join" %>
+  <% end %>
+<% end %>
 <%= link_to 'Edit', edit_game_group_path(@group) %> |
-<%= link_to 'Back', game_groups_path %>
+<%= link_to 'Back', game_groups_path(@game) %>

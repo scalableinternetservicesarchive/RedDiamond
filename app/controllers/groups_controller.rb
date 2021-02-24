@@ -9,6 +9,7 @@ class GroupsController < ApplicationController
 
   # GET /groups/1 or /groups/1.json
   def show
+    @game = Game.find(params[:game_id])
   end
 
   # GET /groups/new
@@ -42,7 +43,18 @@ class GroupsController < ApplicationController
   def update
     @game = @group.game
     respond_to do |format|
-      if @group.update(group_params)
+      if group_params[:join]
+        if @group.current_member_count >= @group.max_member_count
+          format.html { redirect_to game_group_url(@game, @group), notice: "You cannot join a full group!" }
+        elsif @group.update(current_member_count: @group.current_member_count + 1)
+          format.html { redirect_to game_group_url(@game, @group), notice: "Group was successfully updated." }
+          format.json { redirect_link game_group_url(@game, @group) }
+        else
+          format.html { render :edit, status: :unprocessable_entity }
+          format.json { render json: @group.errors, status: :unprocessable_entity }
+        end
+      # end
+      elsif @group.update(group_params)
         format.html { redirect_to game_group_url(@game, @group), notice: "Group was successfully updated." }
         format.json { render :show, status: :ok, location: @group }
       else
@@ -71,6 +83,6 @@ class GroupsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def group_params
-      params.require(:group).permit(:group_name, :activity, :description, :leader_name, :max_member_count, :current_member_count, :game_id)
+      params.require(:group).permit(:group_name, :activity, :description, :leader_name, :max_member_count, :current_member_count, :game_id, :join)
     end
 end
