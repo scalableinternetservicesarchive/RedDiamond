@@ -5,7 +5,7 @@ class HomeController < ApplicationController
   end
 
   def select_game
-    @game = Game.find_by(name: params[:game])
+    @game = Game.find(params[:game])
     redirect_to game_groups_path(@game)
   end
 end

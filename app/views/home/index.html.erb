@@ -6,7 +6,7 @@
 <% end %>
 <br><br>
 <label for="games">Games List</label>
-<%=form_tag('/home/0/select_game') do %>
-  <%= select_tag(:game, options_for_select(@games.map{ |i| i.name })) %>
-  <%= submit_tag "Select" %>
+<%= form_with url: select_game_path do |f| %>
+  <%= f.collection_select :game, Game.all, :id, :name, prompt: true %>
+  <%= f.submit "Select" %>
 <% end %>
