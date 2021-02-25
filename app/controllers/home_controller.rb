@@ -5,7 +5,11 @@ class HomeController < ApplicationController
   end
 
   def select_game
-    @game = Game.find(params[:game])
-    redirect_to game_groups_path(@game)
+    if params[:game] != ""
+      @game = Game.find(params[:game])
+      redirect_to game_groups_path(@game)
+    else
+      redirect_to root_path, notice: "Please select a game"
+    end
   end
 end
