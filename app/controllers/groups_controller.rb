@@ -47,13 +47,11 @@ class GroupsController < ApplicationController
         if @group.current_member_count >= @group.max_member_count
           format.html { redirect_to game_group_url(@game, @group), notice: "You cannot join a full group!" }
         elsif @group.update(current_member_count: @group.current_member_count + 1)
-          format.html { redirect_to game_group_url(@game, @group), notice: "Group was successfully updated." }
-          format.json { redirect_link game_group_url(@game, @group) }
+          format.html { redirect_to game_group_url(@game, @group), notice: "Join success" }
         else
           format.html { render :edit, status: :unprocessable_entity }
           format.json { render json: @group.errors, status: :unprocessable_entity }
         end
-      # end
       elsif @group.update(group_params)
         format.html { redirect_to game_group_url(@game, @group), notice: "Group was successfully updated." }
         format.json { render :show, status: :ok, location: @group }
