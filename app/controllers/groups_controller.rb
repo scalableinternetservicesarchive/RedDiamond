@@ -3,8 +3,12 @@ class GroupsController < ApplicationController
 
   # GET /groups or /groups.json
   def index
+    filter = { game_id: params[:game_id] }
+    filter[:activity] = params[:activity_filter] if !params[:activity_filter].nil? && params[:activity_filter] != ""
+    puts(params[:activity_filter])
     @game = Game.find(params[:game_id])
-    @groups = Group.where(game_id: params[:game_id])
+    @groups = Group.where(filter)
+    @filter = { activity: params[:activity_filter] }
   end
 
   # GET /groups/1 or /groups/1.json
