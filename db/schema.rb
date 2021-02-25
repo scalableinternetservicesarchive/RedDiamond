@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_25_085641) do
+ActiveRecord::Schema.define(version: 2021_02_25_091726) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,7 +47,6 @@ ActiveRecord::Schema.define(version: 2021_02_25_085641) do
     t.string "leader_name"
     t.string "game_name"
     t.integer "max_member_count"
-    t.integer "current_member_count"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "game_id", null: false
