@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   resources :games do
-    resources :groups
+    resources :groups do
+      post 'join', on: :member
+    end
   end
   post 'select_game', to: 'home#select_game', as: 'select_game'
   devise_for :users

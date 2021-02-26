@@ -50,6 +50,20 @@ class GroupsController < ApplicationController
     end
   end
 
+  def join
+    authenticate_user!
+
+    game = Game.find(params[:game_id])
+    group = Group.find(params[:id])
+
+    return redirect_to game_group_url(game, group), notice: 'You are already a member of this group!' if group.members.exists?(current_user.id)
+    return redirect_to game_group_url(game, group), notice: 'This group is already full' if group.members.size > group.max_member_count
+
+    group.members << current_user
+
+    redirect_to game_group_url(game, group), notice: "You are now a member of #{group.group_name}"
+  end
+
   # PATCH/PUT /groups/1 or /groups/1.json
   def update
     @game = @group.game
@@ -92,6 +106,6 @@ class GroupsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def group_params
-      params.require(:group).permit(:group_name, :activity, :description, :leader_name, :max_member_count, :current_member_count, :game_id, :join)
+      params.require(:group).permit(:group_name, :activity, :description, :leader_name, :max_member_count, :game_id, :join)
     end
 end
