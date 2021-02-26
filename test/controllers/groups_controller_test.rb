@@ -7,6 +7,7 @@ class GroupsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should create group" do
+    sign_in create(:user)
     game = create(:game)
 
     assert_difference('Group.count') do
