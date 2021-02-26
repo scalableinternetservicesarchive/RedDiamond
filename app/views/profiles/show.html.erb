@@ -9,7 +9,7 @@
 <% end %>
 
 <h2>Add a comment:</h2>
-<%= render 'comments/form' %>
+<%= render 'comments/form', target: profile_comments_path(@user) %>
 
 <h2>Comments</h2>
 <%= render @user.comments %>
