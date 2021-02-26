@@ -3,8 +3,8 @@
 <h2>Max Number: <%= @group.max_member_count%></h2>
 <h2>Members (<%= @group.members.size %>)</h2>
 <ul>
-  <% @group.members.each do |m| %>
-    <li><%= m.username %></li>
+  <% @group.group_memberships.each do |m| %>
+    <li><%= m.user.username %><%= ' (Owner)' if m.owner? %></li>
   <% end %>
 </ul>
 <h2>Description: <%= @group.description%></h2>

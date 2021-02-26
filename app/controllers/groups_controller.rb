@@ -36,8 +36,11 @@ class GroupsController < ApplicationController
 
   # POST /groups or /groups.json
   def create
+    authenticate_user!
+
     @game = Game.find(params[:game_id])
     @group = @game.groups.create(group_params)
+    @group.group_memberships.create(user: current_user, owner: true)
 
     respond_to do |format|
       if @group.save
