@@ -3,8 +3,19 @@ class GroupsController < ApplicationController
 
   # GET /groups or /groups.json
   def index
+    filter = { game_id: params[:game_id] }
+    params.each do |key, value|
+      if key.end_with?("filter") && !params[key].nil? && params[key] != ""
+        filter_name = key.delete_suffix("_filter")
+        filter[filter_name] = value
+      end
+    end
+    puts("DEBUG")
+    puts(filter)
     @game = Game.find(params[:game_id])
-    @groups = Group.where(game_id: params[:game_id])
+    @groups = Group.where(filter)
+    @filter = filter
+    puts(filter)
   end
 
   # GET /groups/1 or /groups/1.json
@@ -47,13 +58,11 @@ class GroupsController < ApplicationController
         if @group.current_member_count >= @group.max_member_count
           format.html { redirect_to game_group_url(@game, @group), notice: "You cannot join a full group!" }
         elsif @group.update(current_member_count: @group.current_member_count + 1)
-          format.html { redirect_to game_group_url(@game, @group), notice: "Group was successfully updated." }
-          format.json { redirect_link game_group_url(@game, @group) }
+          format.html { redirect_to game_group_url(@game, @group), notice: "Join success" }
         else
           format.html { render :edit, status: :unprocessable_entity }
           format.json { render json: @group.errors, status: :unprocessable_entity }
         end
-      # end
       elsif @group.update(group_params)
         format.html { redirect_to game_group_url(@game, @group), notice: "Group was successfully updated." }
         format.json { render :show, status: :ok, location: @group }
