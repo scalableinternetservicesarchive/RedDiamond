@@ -1,4 +1,4 @@
-<%= form_with model: [@user, Comment.new], url: profile_comments_path(@user) do |form| %>
+<%= form_with scope: :comment, url: target do |form| %>
   <p>
     <%= form.label :body %><br>
     <%= form.text_area :body %>
