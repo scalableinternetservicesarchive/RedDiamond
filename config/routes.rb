@@ -11,5 +11,8 @@ Rails.application.routes.draw do
   resources :profiles, path: '/profile', param: :username do
     resources :comments, only: %i[create]
   end
+  namespace :load_test do
+    get 'sign_in_as_new_user'
+  end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
