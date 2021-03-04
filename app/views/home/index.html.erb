@@ -1,12 +1,37 @@
-<% if current_user %>
-  <%= link_to "profile", profile_path(current_user)  %>
-  <%= link_to "logout", destroy_user_session_path, method: :delete  %>
-<% else %>
-  <%= link_to "login", new_user_session_path %>
-<% end %>
-<br><br>
-<label for="games">Games List</label>
-<%= form_with url: select_game_path do |f| %>
-  <%= f.collection_select :game, Game.all, :id, :name, prompt: true %>
-  <%= f.submit "Select" %>
-<% end %>
+<div class="container mx-auto">
+
+  <%# Title Bar %>
+    <div class="flex flex-row py-4 px-6 bg-gray-800">
+      <div class="flex flex-grow flex-row self-center h-14">
+        <%= image_tag("icons8-diamond-icon.png",  class: "inline-flex h-full object-fill") %>
+        <span class="self-center ml-4">Red Diamond</span>
+      </div>
+      <div class="flex flex-row">
+        <% if current_user %>
+          <%= link_to "profile", profile_path(current_user), class: ["account-button"]%>
+          <%= link_to "logout", destroy_user_session_path, method: :delete, class: ["account-button", "ml-6"] %>
+        <% else %>
+          <%#= link_to "login", new_user_session_path, class: ["button"] %>
+          <%= button_to "login", new_user_session_path, method: "get", class: ["account-button", "ml-6"] %>
+        <% end %>
+      </div>
+    </div>
+  <%# Title Bar End %>
+  
+  <%# Game Selection %>
+  <div class="flex mt-16">
+    <div class="flex px-8 pt-4 pb-8 bg-gray-800 rounded-t-lg">
+      <%# <label for="games">Game Select</label> %>
+      <%= form_with url: select_game_path do |f| %>
+        <%= f.collection_select(:game, Game.all, :id, :name, prompt: "Please select your game") %>
+        <%= f.submit "Select", class: "bg-gray-700 h-full px-4 py-2" %>
+      <% end %>
+    </div>
+    <div class="flex flex-grow justify-end bg-gray-800">
+      <div class="flex flex-grow justify-end pr-6 bg-gray-900 rounded-bl-lg">
+        <button class="border-blue-300 bg-blue-500 bg-opacity-60 border  self-center py-2 px-8 hover:bg-blue-400 hover:bg-opacity-60 ml-6">Create Team</button>
+      </div> 
+    </div>
+  </div>
+  <div class="bg-gray-800 h-screen rounded-tr-lg"></div>
+</div>

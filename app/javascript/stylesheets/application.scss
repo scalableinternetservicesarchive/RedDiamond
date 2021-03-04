@@ -4,33 +4,37 @@
 
 @layer base {
   body {
-    @apply bg-gray-700 text-white;
+    @apply bg-gray-900 text-white;
   }
 
-  [type="text"],
-  [type="email"],
-  [type="url"],
-  [type="password"],
-  [type="number"],
-  [type="date"],
-  [type="datetime-local"],
-  [type="month"],
-  [type="search"],
-  [type="tel"],
-  [type="time"],
-  [type="week"],
-  [multiple],
-  textarea,
+  // [type="text"],
+  // [type="email"],
+  // [type="url"],
+  // [type="password"],
+  // [type="number"],
+  // [type="date"],
+  // [type="datetime-local"],
+  // [type="month"],
+  // [type="search"],
+  // [type="tel"],
+  // [type="time"],
+  // [type="week"],
+  // [multiple],
+  // textarea,
   select {
-    @apply bg-gray-800 border-none rounded-md;
+    @apply focus:outline-none border-0 border-l-4 border-blue-400 bg-gray-700 h-full px-6 w-80;
   }
 
-  [type="submit"] {
-    @apply cursor-pointer bg-gray-800 hover:bg-gray-900 border-none rounded-md py-1 px-2;
-  }
+  // [type="submit"] {
+  //   @apply cursor-pointer bg-gray-800 hover:bg-gray-900 border-none rounded-md py-1 px-2;
+  // }
 }
 
 @layer components {
+  .account-button {
+    @apply border-red-400 bg-red-600 bg-opacity-50 border self-center py-2 px-6 hover:bg-red-500 hover:bg-opacity-60;
+  }
+
   .notice {
     @apply flex flex-col justify-center items-center m-1 font-medium py-1 px-2 bg-white rounded-md text-yellow-700 bg-yellow-100 border border-yellow-300;
   }
