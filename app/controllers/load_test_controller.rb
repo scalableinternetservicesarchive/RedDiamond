@@ -18,6 +18,13 @@ class LoadTestController < ApplicationController
     end
   end
 
+  def reset_table
+    table = params[:table].classify.constantize
+    table.delete_all
+    ActiveRecord::Base.connection.reset_pk_sequence!(table.table_name)
+    redirect_to root_path, alert: "Reset table #{table.table_name}"
+  end
+
   def seed_groups
     num_games = params[:num_games].to_i
     num_groups = params[:num_groups].to_i

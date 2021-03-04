@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     get 'sign_in_as_new_user'
     get 'seed_games'
     get 'seed_groups/:num_games/:num_groups' => '/load_test#seed_groups'
+    get 'reset_table/:table' => '/load_test#reset_table'
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
