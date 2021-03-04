@@ -1,36 +1,62 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Groups</h1>
+<div class="container mx-auto">
+  <%= render "home/titlebar"%>
 
-<h4>Activity</h4>
-<%= form_with url: game_groups_path, method: "get" do |f| %>
-  <% ["activity", "max_member_count"].each do |filter| %>
-    <%= f.collection_select "#{filter}_filter", Group.select(filter).where(game_id: @game.id).distinct, filter, filter, { include_blank: "All #{filter.capitalize}", selected: @filter[filter] } %>
-    <%= f.submit "Select" %>
-  <% end %>
-<% end %>
+<%# Groups Selection %>
+  <div class="flex mt-16">
+    
+    <div class="flex px-10 py-6 bg-gray-800 rounded-t-sm">
+      <label for="games"><%= @game.name %></label>
+    <%#  <%= form_with url: select_game_path do |f| %>
+    <%#     <%= f.collection_select(:game, Game.all, :id, :name, prompt: "Please select your game") %>
+    <%#     <%= f.submit "Select", class: "bg-gray-700 h-full px-4 py-2" %>
+    <%#   <% end %>
+    </div>
 
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+    <div class="flex flex-grow justify-end bg-gray-800">
+      <div class="flex flex-grow justify-end pr-6 bg-gray-900 rounded-bl-sm">
+        <%= link_to 'Create Group', new_game_group_path(@game), class: "border-blue-300 bg-blue-500 bg-opacity-60 border px-8 py-2 self-center hover:bg-blue-300 hover:bg-opacity-60 transition" %>
+        <%#= link_to 'Back', root_path %>
+        <%# <button class="border-blue-300 bg-blue-500 bg-opacity-60 border  self-center py-2 px-8 hover:bg-blue-400 hover:bg-opacity-60 ml-6">Create Team</button> %>
+      </div> 
+    </div>
+  </div>
+  
+  <div class="bg-gray-800 rounded-tr-sm rounded-b-sm py-10">
 
-  <tbody>
-    <% @groups.each do |group| %>
-      <tr>
-        <td><%= group.group_name %></td>
-        <td><%= group.activity %></td>
-        <td><%= link_to 'Show', game_group_path(@game, group) %></td>
-        <td><%= link_to 'Edit', edit_game_group_path(@game, group) %></td>
-        <td><%= link_to 'Delete', game_group_path(@game, group), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+    <div class="flex flex-grow justify-end">
+    <%= form_with url: game_groups_path, method: "get" do |f|%>
+      <% ["activity", "max_member_count"].each do |filter| %>
+        <%= f.collection_select "#{filter}_filter", Group.select(filter).where(game_id: @game.id).distinct, filter, filter, { include_blank: "All #{filter.capitalize}", selected: @filter[filter] }, class: "mx-2" %>
+        <%= f.submit "Select", class: "mr-8 h-full px-4 bg-gray-700 hover:bg-gray-600 transition " %>
+      <% end %>
     <% end %>
-  </tbody>
-</table>
+    </div>
 
-<br>
+    <% @groups.each do |group| %>
+      <div class="group-box">
+        <div class="flex flex-grow flex-col">
+          <div class="flex flex-row pl-4">
+            <h1 class="text-3xl font-medium"><%= group.group_name %></h1>
+            <Span class="group-type-badge"><%= group.activity %></Span>
+          </div>
+          <div class="flex pl-6 mt-2">
+            <h2 class="text-gray-300"><%= group.description%></h2>
+            
+          </div>
+        </div>
 
-<%= link_to 'New Group', new_game_group_path(@game) %>
-<%= link_to 'Back', root_path %>
+        <div class="flex flex-0 mr-4">
+          <button><%= link_to 'Delete', game_group_path(@game, group), method: :delete, data: { confirm: 'Are you sure?' }, class: "group-button" %></button>
+          <button><%= link_to 'Edit', edit_game_group_path(@game, group), class: "group-button"  %></button>
+          <button><%= link_to 'Enter', game_group_path(@game, group), class: "group-button"  %></button>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+
+
+</div>

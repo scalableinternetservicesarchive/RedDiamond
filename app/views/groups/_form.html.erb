@@ -1,37 +1,68 @@
-<%= form_with model: [@game, @group] do |form| %>
-  <% if group.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(group.errors.count, "error") %> prohibited this group from being saved:</h2>
 
-      <ul>
-        <% group.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+
+  <%# Groups Title %>
+  <div class="flex mt-16">
+    
+    <div class="flex px-10 py-6 bg-gray-800 rounded-t-sm">
+      <label for="games"><%= link_to @game.name, game_groups_path(@game) %></label>
     </div>
+
+    <div class="flex flex-grow justify-end bg-gray-800">
+      <div class="flex flex-grow justify-end pr-6 bg-gray-900 rounded-bl-sm">
+        <%#= link_to 'Back', root_path %>
+        <%# <button class="border-blue-300 bg-blue-500 bg-opacity-60 border  self-center py-2 px-8 hover:bg-blue-400 hover:bg-opacity-60 ml-6">Create Team</button> %>
+      </div> 
+    </div>
+  </div>
+
+  <div class="bg-gray-800 rounded-tr-sm rounded-b-sm py-10 px-8">
+    <%# Title Section %>
+    <%= form_with model: [@game, @group] do |form| %>
+    <div class="flex border-b border-gray-600 py-4">
+      <div class="flex flex-grow">
+      </div>
+      <div class="flex">
+        <%= link_to 'Cancel', :back, class: "edit-button ml-4" %>
+        <%= form.submit class: "edit-button ml-4 "%>
+      </div>
+    </div>
+
+    
+    <% if group.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(group.errors.count, "error") %> prohibited this group from being saved:</h2>
+
+        <ul>
+          <% group.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    
+    <div class="field mt-4 flex">
+      <%= form.label :group_name, "Group Name:", class: "text-gray-300 self-center w-32"%>
+      <%= form.text_field :group_name, class: "ml-4 px-2 py-1 bg-gray-700"%>
+    </div>
+
+    <div class="field mt-4 flex">
+      <%= form.label :max_member_count, "Max Number:", class: "text-gray-300 self-center w-32" %>
+      <%= form.number_field :max_member_count, min: 2, class: "ml-4 px-2 py-1 bg-gray-700" %>
+    </div>
+
+    <div class="field mt-4 flex">
+      <%= form.label :description, "Description:", class: "text-gray-300 self-center w-32" %>
+      <%= form.text_field :description, class: "ml-4 px-2 py-1 bg-gray-700" %>
+    </div>
+
+    <div class="field mt-4 flex">
+      <%= form.label :activity, "Activity:", class: "text-gray-300 self-center w-32" %>
+      <%= form.text_field :activity, class: "ml-4 px-2 py-1 bg-gray-700" %>
+    </div>
+
+    
   <% end %>
   
-  <div class="field">
-    <%= form.label :group_name, "Group Name:" %>
-    <%= form.text_field :group_name %>
   </div>
 
-  <div class="field">
-    <%= form.label :max_member_count, "Max Number:" %>
-    <%= form.number_field :max_member_count, min: 2 %>
-  </div>
 
-  <div class="field">
-    <%= form.label :description, "Description:" %>
-    <%= form.text_field :description %>
-  </div>
-
-  <div class="field">
-    <%= form.label :activity, "Activity:" %>
-    <%= form.text_field :activity %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>

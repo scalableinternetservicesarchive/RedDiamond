@@ -1,0 +1,17 @@
+<%# Title Bar %>
+<div class="title-bar">
+    <div class="logo-region">
+        <%= image_tag("icons8-diamond-icon.png",  class: "inline-flex h-full object-fill") %>
+        <%= link_to "Red Diamond", root_path, class: "self-center ml-4" %>
+    </div>
+    <div class="flex flex-row">
+        <% if current_user %>
+        <%= link_to "Profile", profile_path(current_user), class: ["account-button"]%>
+        <%= link_to "Logout", destroy_user_session_path, method: :delete, class: ["account-button", "ml-6"] %>
+        <% else %>
+        <%#= link_to "login", new_user_session_path, class: ["button"] %>
+        <%= button_to "Login", new_user_session_path, method: "get", class: ["account-button", "ml-6"] %>
+        <% end %>
+    </div>
+</div>
+<%# Title Bar End %>

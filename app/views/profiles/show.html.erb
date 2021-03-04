@@ -1,18 +1,47 @@
-<h1>
-  Username: <%= @user.username %>
-</h1>
-<p>
-  Bio: <%= @user.bio %>
-</p>
-<% if @editable %>
-  <%= link_to 'edit', edit_profile_path(@user) %>
-<% end %>
+<div class="container mx-auto">
+  <%= render 'home/titlebar' %>
+  <%# Groups Selection %>
+  <div class="flex mt-16">
+    
+    <div class="flex px-10 py-6 bg-gray-800 rounded-t-sm">
+      <label>Profile</label>
+    </div>
 
-<h2>Add a comment:</h2>
-<%= render 'comments/form', target: profile_comments_path(@user) %>
+    <div class="flex flex-grow justify-end bg-gray-800">
+      <div class="flex flex-grow justify-end pr-6 bg-gray-900 rounded-bl-sm">
+        <%#= link_to 'Back', root_path %>
+        <%# <button class="border-blue-300 bg-blue-500 bg-opacity-60 border  self-center py-2 px-8 hover:bg-blue-400 hover:bg-opacity-60 ml-6">Create Team</button> %>
+      </div> 
+    </div>
+  </div>
 
-<h2>Comments</h2>
-<%= render @user.comments %>
+  <div class="bg-gray-800 rounded-tr-sm rounded-b-sm py-10 px-8">
+    <%# Title Section %>
+    <div class="flex border-b border-gray-600 py-4">
+      <div class="flex flex-grow flex-col">
+        <h1 class="font-medium text-2xl"><%= @user.username %></h1>
+        <h2 class="text-gray-300 font-sm mt-2"> <%= @user.bio %></h2>
+      </div>
+      <div class="flex">
+        <% if @editable %>
+          <%= link_to 'Edit', edit_profile_path(@user), class: "edit-button ml-4" %>
+        <% end %>
+      </div>
+    </div>
+    
+    <%# Comments Section %>
+    <div class="py-4">
+      <h2 class="text-gray-400 pb-2">Add a comment:</h2>
+      <%= render 'comments/form', target: profile_comments_path(@user) %>
+  
+      <h2 class="text-gray-400 pb-2 mt-4" >Comments:</h2>
+      <%= render @user.comments %>
+    </div>
+  </div>
+  
+    
+
+</div>
 
 
 

@@ -1,22 +1,57 @@
-<h1>Current Group: <%= @group.group_name%></h1>
-<h2>Group ID: <%= @group.id%></h2>
-<h2>Max Number: <%= @group.max_member_count%></h2>
-<h2>Members (<%= @group.members.size %>)</h2>
-<ul>
-  <% @group.group_memberships.each do |m| %>
-    <li><%= m.user.username %><%= ' (Owner)' if m.owner? %></li>
-  <% end %>
-</ul>
-<h2>Description: <%= @group.description%></h2>
-<h2>Activity: <%= @group.activity%></h2>
-<h2>Game: <%= @game.name%></h2>
-<%= button_to 'Join Group', join_game_group_path(@game, @group), method: :post %>
+<div class="container mx-auto">
+  <%=render 'home/titlebar'%>
 
-<h2>Add a comment:</h2>
-<%= render 'comments/form', target: game_group_comments_path(@game, @group) %>
+  <%# Groups Selection %>
+  <div class="flex mt-16">
+    
+    <div class="flex px-10 py-6 bg-gray-800 rounded-t-sm">
+      <label for="games"><%= link_to @game.name, game_groups_path(@game) %></label>
+    </div>
 
-<h2>Comments</h2>
-<%= render @group.comments %>
+    <div class="flex flex-grow justify-end bg-gray-800">
+      <div class="flex flex-grow justify-end pr-6 bg-gray-900 rounded-bl-sm">
+        <%#= link_to 'Back', root_path %>
+        <%# <button class="border-blue-300 bg-blue-500 bg-opacity-60 border  self-center py-2 px-8 hover:bg-blue-400 hover:bg-opacity-60 ml-6">Create Team</button> %>
+      </div> 
+    </div>
+  </div>
 
-<%= link_to 'Edit', edit_game_group_path(@group) %> |
-<%= link_to 'Back', game_groups_path(@game) %>
+  <div class="bg-gray-800 rounded-tr-sm rounded-b-sm py-10 px-8">
+    <%# Title Section %>
+    <div class="flex border-b border-gray-600 py-4">
+      <div class="flex flex-grow flex-col">
+         <h1 class="font-medium text-2xl"><%= @group.group_name%></h1>
+         <h2 class="text-gray-300 font-sm mt-2">ID: <%= @group.id%></h2>
+      </div>
+      <div class="flex">
+        <%= link_to 'Edit', edit_game_group_path(@group), class: "border-blue-300 bg-blue-500 bg-opacity-60 border px-8 py-2 self-center hover:bg-blue-300 hover:bg-opacity-60 transition"%>
+        <%#= link_to 'Back', game_groups_path(@game) %>
+        <%= link_to 'Join', join_game_group_path(@game, @group), method: :post, class: "ml-4 border-blue-300 bg-blue-500 bg-opacity-60 border px-8 py-2 self-center hover:bg-blue-300 hover:bg-opacity-60 transition" %>
+      </div>
+    </div>
+    
+    <%# Description Section %>
+    <div class="py-4 border-b border-gray-600">
+      <h2>Max Number: <%= @group.max_member_count%></h2>
+      <h2>Members (<%= @group.members.size %>)</h2>
+      <ul>
+        <% @group.group_memberships.each do |m| %>
+          <li><%= m.user.username %><%= ' (Owner)' if m.owner? %></li>
+        <% end %>
+      </ul>
+      <h2>Description: <%= @group.description%></h2>
+      <h2>Activity: <%= @group.activity%></h2>
+    </div>
+    
+     <%# Comments Section %>
+    <div class="py-4">
+      <h2 class="text-gray-400 pb-2">Add a comment:</h2>
+      <%= render 'comments/form', target: game_group_comments_path(@game, @group) %>
+
+      <h2 class="text-gray-400 pb-2 mt-4" >Comments:</h2>
+      <%= render @group.comments %>
+    </div>
+  </div>
+</div>
+
+  

@@ -1,10 +1,9 @@
 <%= form_with scope: :comment, url: target do |form| %>
   <p>
-    <%= form.label :body %><br>
     <%= form.text_area :body %>
   </p>
 
   <p>
-    <%= form.submit %>
+    <%= form.submit "Post", class: "bg-gray-600 bg-opacity-80 px-4 py-1 my-2 rounded-sm shadow-md transition hover:shadow-xl hover:bg-gray-500" %>
   </p>
 <% end %>

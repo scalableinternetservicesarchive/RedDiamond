@@ -1,4 +1,6 @@
-<div>
-  <%= comment.commenter.username %>:
-  <%= comment.body %>
+<div class="mb-4">
+  <h1 class="text-blue-300 text-opacity-75 text-xs"><%= comment.commenter.username %></h1>
+  <div class="bg-gray-500 bg-opacity-50 inline-flex px-4 py-2 rounded-b-lg rounded-tr-lg mt-1">
+  <p><%= comment.body %></p>
+  </div>
 </div>

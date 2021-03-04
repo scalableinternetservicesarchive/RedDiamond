@@ -1,14 +1,37 @@
-<%= form_with model: @user, url: profile_path do |form| %>
-  <div>
-    Username: <%= @user.username %>
+<div class="container mx-auto">
+  <%= render 'home/titlebar' %>
+
+  <div class="flex mt-16">
+    <div class="flex px-10 py-6 bg-gray-800 rounded-t-sm">
+      <label>Profile</label>
+    </div>
+
+    <div class="flex flex-grow justify-end bg-gray-800"><div class="flex flex-grow justify-end pr-6 bg-gray-900 rounded-bl-sm"></div></div>
   </div>
 
-  <div>
-    <%= form.label :bio %><br>
-    <%= form.text_area :bio %><br>
-  </div>
+  <div class="bg-gray-800 rounded-tr-sm rounded-b-sm py-10 px-8">
+    <%# Title Section %>
+    <%= form_with model: @user, url: profile_path do |form| %>
+    <div class="flex border-b border-gray-600 py-4">
+      <div class="flex flex-grow flex-col">
+        <h1 class="font-medium text-2xl"><%= @user.username %></h1>
+      </div>
+      <div class="flex">
+        <%= link_to 'Back', :back, class: "edit-button ml-4"%>
+        <%= form.submit class: "edit-button ml-4"%>
+      </div>
+    </div>
+    
+    <div class="py-4">
+      <%= form.label :bio, class: "text-gray-400 pb-2"%><br>
+      <%= form.text_area :bio %><br>
+    <div>
+      
+  <% end %>
+</div>
 
-  <div>
-    <%= form.submit %>
-  </div>
-<% end %>
+
+
+  
+  
+    
