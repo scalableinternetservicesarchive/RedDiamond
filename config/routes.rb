@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   end
   namespace :load_test do
     get 'sign_in_as_new_user'
+    get 'seed_games'
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
