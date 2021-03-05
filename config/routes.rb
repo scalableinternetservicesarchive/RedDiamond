@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   root 'home#index'
   resources :profiles, path: '/profile', param: :username do
     resources :comments, only: %i[create]
+    resources :thumbs, only: %i[create]
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

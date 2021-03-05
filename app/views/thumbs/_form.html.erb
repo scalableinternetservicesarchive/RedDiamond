@@ -1,0 +1,9 @@
+<%= form_with scope: :thumb, url: target do |form| %>
+  <p>
+    <%= form.check_box :body %>Thumb up or not
+  </p>
+
+  <p>
+    <%= form.submit 'Submit your vote'%>
+  </p>
+<% end %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_26_165549) do
+ActiveRecord::Schema.define(version: 2021_03_02_002326) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,6 +56,19 @@ ActiveRecord::Schema.define(version: 2021_02_26_165549) do
     t.index ["game_id"], name: "index_groups_on_game_id"
   end
 
+  create_table "thumbs", force: :cascade do |t|
+    t.bigint "thumber_id", null: false
+    t.text "body"
+    t.bigint "thumbable_id", null: false
+    t.integer "thumbcount"
+    t.string "thumbable_type"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["thumbable_id"], name: "index_thumbs_on_thumbable_id"
+    t.index ["thumbable_type", "thumbable_id"], name: "index_thumbs_on_thumbable_type_and_thumbable_id"
+    t.index ["thumber_id"], name: "index_thumbs_on_thumber_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "username", null: false
     t.string "bio"
@@ -75,4 +88,5 @@ ActiveRecord::Schema.define(version: 2021_02_26_165549) do
   add_foreign_key "group_memberships", "groups"
   add_foreign_key "group_memberships", "users"
   add_foreign_key "groups", "games"
+  add_foreign_key "thumbs", "users", column: "thumber_id"
 end

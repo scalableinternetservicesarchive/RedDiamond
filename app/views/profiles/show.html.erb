@@ -8,11 +8,22 @@
   <%= link_to 'edit', edit_profile_path(@user) %>
 <% end %>
 
+<h2>Thumb</h2>
+<p>
+<%= @thumbup_num %> Total thumb up
+</p>
+<%= @thumbdown_num %> Total thumb down
+<%= render 'thumbs/form', target: profile_thumbs_path(@user) %>
+
+
 <h2>Add a comment:</h2>
 <%= render 'comments/form', target: profile_comments_path(@user) %>
 
 <h2>Comments</h2>
 <%= render @user.comments %>
+
+
+
 
 
 
