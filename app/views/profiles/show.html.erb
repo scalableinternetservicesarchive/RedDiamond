@@ -8,11 +8,11 @@
   <%= link_to 'edit', edit_profile_path(@user) %>
 <% end %>
 
-<h2>Thumb</h2>
+<h2>Upvote</h2>
 <p>
-<%= @thumbup_num %> Total thumb up
+Total Upvote: <%= @thumbup_num %> Total Downvote: <%= @thumbdown_num %> 
 </p>
-<%= @thumbdown_num %> Total thumb down
+
 <%= render 'thumbs/form', target: profile_thumbs_path(@user) %>
 
 

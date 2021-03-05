@@ -9,7 +9,8 @@ class ThumbsController < ApplicationController
     else
       return head :unprocessable_entity
     end
-    
+    p '!!!!!!!!!!', thumb_params
+    p '***********', thumb_params[:thumber][:username]
     target.create(thumb_params)
 
     redirect_to redirect_target
