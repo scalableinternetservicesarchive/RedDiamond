@@ -62,9 +62,28 @@ class GroupsController < ApplicationController
     return redirect_to game_group_url(game, group), notice: 'You are already a member of this group!' if group.members.exists?(current_user.id)
     return redirect_to game_group_url(game, group), notice: 'This group is already full' if group.members.size > group.max_member_count
 
-    group.members << current_user
+    group.group_memberships.create(user: current_user, pending: true)
 
-    redirect_to game_group_url(game, group), notice: "You are now a member of #{group.group_name}"
+    redirect_to game_group_url(game, group), notice: "You have requested to join #{group.group_name}"
+  end
+
+  def approve
+    authenticate_user!
+
+    game = Game.find(params[:game_id])
+    group = Group.find(params[:id])
+    to_approve = User.find(params[:user_id])
+
+    requester_membership = group.group_memberships.find_by(user: current_user)
+    membership = group.group_memberships.find_by(user: to_approve)
+
+    return redirect_to game_group_url(game, group), notice: 'You are not a member of this group' if requester_membership.nil? || requester_membership.pending?
+    return redirect_to game_group_url(game, group), notice: 'This user has not requested to join this group' if membership.nil?
+    return redirect_to game_group_url(game, group), notice: 'This user is already a member of this group' unless membership.pending?
+
+    membership.update!(pending: false)
+
+    redirect_to game_group_url(game, group), notice: "#{to_approve.username} is now a member of #{group.group_name}"
   end
 
   # PATCH/PUT /groups/1 or /groups/1.json

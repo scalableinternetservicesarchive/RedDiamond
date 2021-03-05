@@ -7,4 +7,8 @@ class Group < ApplicationRecord
   has_many :comments, as: :commentable, dependent: :destroy
 
   alias_attribute :members, :users
+
+  def owner?(user)
+    group_memberships.where(user: user, owner: true).exists?
+  end
 end

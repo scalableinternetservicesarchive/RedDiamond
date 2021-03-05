@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :games do
     resources :groups do
       post 'join', on: :member
+      post 'approve/:user_id', to: 'groups#approve', on: :member, as: 'approve'
       resources :comments, only: %i[create]
     end
   end
