@@ -3,19 +3,20 @@ class GroupsController < ApplicationController
 
   # GET /groups or /groups.json
   def index
-    filter = { game_id: params[:game_id] }
+    @filter = { game_id: params[:game_id] }
     params.each do |key, value|
-      if key.end_with?("filter") && !params[key].nil? && params[key] != ""
-        filter_name = key.delete_suffix("_filter")
-        filter[filter_name] = value
+      if key.end_with?('filter') && params[key].present?
+        filter_name = key.delete_suffix('_filter')
+        @filter[filter_name] = value
       end
     end
-    puts("DEBUG")
-    puts(filter)
     @game = Game.find(params[:game_id])
-    @pagy, @groups = pagy(Group.where(filter))
-    @filter = filter
-    puts(filter)
+    @pagy, @groups = pagy(Group.where(@filter))
+
+    if params['search'].present?
+      @groups = @groups.where('description ILIKE ?', "%#{params['search']}%")
+      @search = params['search']
+    end
   end
 
   # GET /groups/1 or /groups/1.json
