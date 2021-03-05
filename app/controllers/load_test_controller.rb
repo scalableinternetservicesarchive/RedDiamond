@@ -34,7 +34,16 @@ class LoadTestController < ApplicationController
       games = num_games.times.map { |i| { name: "Cool Game #{i}", **timestamps } }
       games_with_ids = Game.insert_all!(games)
       games_with_ids.each do |game|
-        groups = num_groups.times.map { |i| { game_id: game['id'], group_name: "Cool Group #{i}", max_member_count: 5, **timestamps }}
+        groups = num_groups.times.map do |i|
+          {
+            game_id: game['id'],
+            group_name: "Cool Group #{i}",
+            description: random_paragraph_with_keyword,
+            activity: Faker::Ancient.god,
+            max_member_count: 5,
+            **timestamps
+          }
+        end
         groups_with_ids = Group.insert_all!(groups)
         group_memberships = groups_with_ids.map { |group| { group_id: group['id'], user_id: user['id'], **timestamps } }
         GroupMembership.insert_all!(group_memberships)
@@ -59,5 +68,15 @@ class LoadTestController < ApplicationController
       User.insert_all!(users)
     end
     redirect_to root_path, alert: "Seeded #{num_users} users"
+  end
+
+  private
+
+  def random_paragraph_with_keyword
+    "#{random_paragraph} #{Faker::Games::Pokemon.name}! #{random_paragraph}"
+  end
+
+  def random_paragraph
+    Faker::Lorem.paragraph(sentence_count: 5, random_sentences_to_add: 5, supplemental: true)
   end
 end
