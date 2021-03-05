@@ -42,4 +42,22 @@ class LoadTestController < ApplicationController
     end
     redirect_to root_path, alert: "Seeded #{num_games} games and #{num_groups} groups per game"
   end
+
+  def seed_users
+    num_users = params[:num_users].to_i
+    encrypted_password = User.new.send(:password_digest, 'test123')
+    ActiveRecord::Base.transaction do
+      timestamps = { created_at: Time.now, updated_at: Time.now }
+      users = num_users.times.map do |i|
+        {
+          username: "user#{i}",
+          email: "user#{i}@example.com",
+          encrypted_password: encrypted_password,
+          **timestamps
+        }
+      end
+      User.insert_all!(users)
+    end
+    redirect_to root_path, alert: "Seeded #{num_users} users"
+  end
 end
