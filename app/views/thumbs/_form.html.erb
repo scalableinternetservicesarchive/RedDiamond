@@ -1,7 +1,7 @@
 <%= form_with scope: :thumb, url: target do |form| %>
   <p>
-    <%= form.radio_button :body, '1', :checked => true %> Upvote
-    <%= form.radio_button :body, '0' %> Downvote
+    <%= form.radio_button :value, 1 %> Upvote
+    <%= form.radio_button :value, -1 %> Downvote
   </p>
 
   <p>

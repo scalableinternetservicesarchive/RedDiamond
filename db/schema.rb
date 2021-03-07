@@ -58,14 +58,12 @@ ActiveRecord::Schema.define(version: 2021_03_02_002326) do
 
   create_table "thumbs", force: :cascade do |t|
     t.bigint "thumber_id", null: false
-    t.text "body"
-    t.bigint "thumbable_id", null: false
-    t.integer "thumbcount"
+    t.integer "value"
     t.string "thumbable_type"
+    t.bigint "thumbable_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["thumbable_id"], name: "index_thumbs_on_thumbable_id"
-    t.index ["thumbable_type", "thumbable_id"], name: "index_thumbs_on_thumbable_type_and_thumbable_id"
+    t.index ["thumbable_type", "thumbable_id"], name: "index_thumbs_on_thumbable"
     t.index ["thumber_id"], name: "index_thumbs_on_thumber_id"
   end
 
