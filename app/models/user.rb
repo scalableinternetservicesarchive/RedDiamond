@@ -7,6 +7,7 @@ class User < ApplicationRecord
   has_many :group_memberships
   has_many :groups, through: :group_memberships
   has_many :comments, as: :commentable
+  has_many :thumbs, as: :thumbable
 
   def to_param
     username
