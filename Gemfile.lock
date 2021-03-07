@@ -119,6 +119,7 @@ GEM
       mini_portile2 (~> 2.5.0)
       racc (~> 1.4)
     orm_adapter (0.5.0)
+    pagy (3.11.0)
     pg (1.2.3)
     public_suffix (4.0.6)
     puma (5.2.1)
@@ -229,6 +230,7 @@ DEPENDENCIES
   factory_bot_rails
   jbuilder (~> 2.7)
   listen (~> 3.3)
+  pagy
   pg (~> 1.1)
   puma (~> 5.0)
   rack-mini-profiler (~> 2.0)

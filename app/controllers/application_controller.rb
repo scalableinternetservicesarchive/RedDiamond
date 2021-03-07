@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  include Pagy::Backend
+
   skip_forgery_protection
   before_action :configure_devise, if: :devise_controller?
 

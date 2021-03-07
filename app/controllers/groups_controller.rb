@@ -13,7 +13,7 @@ class GroupsController < ApplicationController
     puts("DEBUG")
     puts(filter)
     @game = Game.find(params[:game_id])
-    @groups = Group.where(filter)
+    @pagy, @groups = pagy(Group.where(filter))
     @filter = filter
     puts(filter)
   end
