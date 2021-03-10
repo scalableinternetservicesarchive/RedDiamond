@@ -3,14 +3,14 @@
 <h1>Groups</h1>
 
 <h4>Activity</h4>
-<% cache Group do %>
+<%# cache Group do %>
   <%= form_with url: game_groups_path, method: "get" do |f| %>
     <% ["activity", "max_member_count"].each do |filter| %>
       <%= f.collection_select "#{filter}_filter", Group.select(filter).where(game_id: @game.id).distinct, filter, filter, { include_blank: "All #{filter.capitalize}", selected: @filter[filter] } %>
       <%= f.submit "Select" %>
     <% end %>
   <% end %>
-<% end %>
+<%# end %>
 
 <table>
   <thead>
