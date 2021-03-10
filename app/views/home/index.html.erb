@@ -6,7 +6,9 @@
 <% end %>
 <br><br>
 <label for="games">Games List</label>
-<%= form_with url: select_game_path do |f| %>
-  <%= f.collection_select :game, Game.all, :id, :name, prompt: true %>
-  <%= f.submit "Select" %>
+<% cache Game do %>
+  <%= form_with url: select_game_path do |f| %>
+    <%= f.collection_select :game, Game.all, :id, :name, prompt: true %>
+    <%= f.submit "Select" %>
+  <% end %>
 <% end %>

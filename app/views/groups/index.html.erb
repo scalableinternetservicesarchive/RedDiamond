@@ -3,10 +3,12 @@
 <h1>Groups</h1>
 
 <h4>Activity</h4>
-<%= form_with url: game_groups_path, method: "get" do |f| %>
-  <% ["activity", "max_member_count"].each do |filter| %>
-    <%= f.collection_select "#{filter}_filter", Group.select(filter).where(game_id: @game.id).distinct, filter, filter, { include_blank: "All #{filter.capitalize}", selected: @filter[filter] } %>
-    <%= f.submit "Select" %>
+<% cache Group do %>
+  <%= form_with url: game_groups_path, method: "get" do |f| %>
+    <% ["activity", "max_member_count"].each do |filter| %>
+      <%= f.collection_select "#{filter}_filter", Group.select(filter).where(game_id: @game.id).distinct, filter, filter, { include_blank: "All #{filter.capitalize}", selected: @filter[filter] } %>
+      <%= f.submit "Select" %>
+    <% end %>
   <% end %>
 <% end %>
 
@@ -19,13 +21,15 @@
 
   <tbody>
     <% @groups.each do |group| %>
-      <tr>
-        <td><%= group.group_name %></td>
-        <td><%= group.activity %></td>
-        <td><%= link_to 'Show', game_group_path(@game, group) %></td>
-        <td><%= link_to 'Edit', edit_game_group_path(@game, group) %></td>
-        <td><%= link_to 'Delete', game_group_path(@game, group), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+      <% cache group do %>
+        <tr>
+          <td><%= group.group_name %></td>
+          <td><%= group.activity %></td>
+          <td><%= link_to 'Show', game_group_path(@game, group) %></td>
+          <td><%= link_to 'Edit', edit_game_group_path(@game, group) %></td>
+          <td><%= link_to 'Delete', game_group_path(@game, group), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>
