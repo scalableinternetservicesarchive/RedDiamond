@@ -10,9 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_04_182428) do
+ActiveRecord::Schema.define(version: 2021_03_10_074904) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pg_trgm"
   enable_extension "plpgsql"
 
   create_table "comments", force: :cascade do |t|
@@ -53,6 +54,7 @@ ActiveRecord::Schema.define(version: 2021_03_04_182428) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "game_id", null: false
+    t.index ["description"], name: "index_groups_on_description", opclass: :gist_trgm_ops, using: :gist
     t.index ["game_id"], name: "index_groups_on_game_id"
   end
 
