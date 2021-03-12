@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   root 'home#index'
   resources :profiles, path: '/profile', param: :username do
     resources :comments, only: %i[create]
+    resources :thumbs, only: %i[create]
   end
   namespace :load_test do
     get 'sign_in_as_new_user'

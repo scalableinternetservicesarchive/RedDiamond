@@ -8,11 +8,22 @@
   <%= link_to 'edit', edit_profile_path(@user) %>
 <% end %>
 
+<h2>Upvote</h2>
+<p>
+Total Upvote: <%= @thumbup_num %>
+</p>
+
+<%= render 'thumbs/form', target: profile_thumbs_path(@user) %>
+
+
 <h2>Add a comment:</h2>
 <%= render 'comments/form', target: profile_comments_path(@user) %>
 
 <h2>Comments</h2>
 <%= render @user.comments %>
+
+
+
 
 
 

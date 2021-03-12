@@ -13,7 +13,7 @@ class CommentsController < ApplicationController
     else
       return head :unprocessable_entity
     end
-
+    p '!!!!!!', comment_params
     target.create(comment_params)
 
     redirect_to redirect_target

@@ -3,6 +3,7 @@ class ProfilesController < ApplicationController
     @user = User.find_by_username(params[:username])
     return not_found unless @user
 
+    @thumbup_num = @user.thumbs.sum(:value)
     @editable = true if current_user == @user
   end
 
