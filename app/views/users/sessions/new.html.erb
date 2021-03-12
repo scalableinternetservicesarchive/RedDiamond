@@ -1,26 +1,51 @@
-<h2>Log in</h2>
-
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
-
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+<div class="container mx-auto">
+  <%= render 'home/titlebar' %>
+  <div class="flex mt-16">
+    
+    <div class="flex px-10 py-6 bg-gray-800 rounded-t-sm">
+      <label>Login</label>
     </div>
-  <% end %>
 
-  <div class="actions">
-    <%= f.submit "Log in" %>
+    <div class="flex flex-grow justify-end bg-gray-800">
+      <div class="flex flex-grow justify-end pr-6 bg-gray-900 rounded-bl-sm">
+        <%#= link_to 'Back', root_path %>
+        <%# <button class="border-blue-300 bg-blue-500 bg-opacity-60 border  self-center py-2 px-8 hover:bg-blue-400 hover:bg-opacity-60 ml-6">Create Team</button> %>
+      </div> 
+    </div>
   </div>
-<% end %>
 
-<%= render "users/shared/links" %>
+  <div class="bg-gray-800 rounded-tr-sm rounded-b-sm py-10 px-8">
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <%# Title Section %>
+      <div class="flex border-b border-gray-600 py-4">
+        <div class="flex flex-grow">
+        </div>
+        <div class="flex">
+          <%= link_to 'Cancel', :back, class: "edit-button ml-4" %>
+          <%= f.submit "Login", class: "edit-button ml-4 "%>
+        </div>
+      </div>
+
+      
+      <div class="field mt-4 flex">
+        <%= f.label :email, class: "text-gray-300 self-center w-32" %><br />
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "ml-4 px-2 py-1 bg-gray-700" %>
+      </div>
+
+      <div class="field mt-4 flex">
+        <%= f.label :password, class: "text-gray-300 self-center w-32" %><br />
+        <%= f.password_field :password, autocomplete: "current-password", class: "ml-4 px-2 py-1 bg-gray-700" %>
+      </div>
+
+      <% if devise_mapping.rememberable? %>
+        <div class="field mt-4 flex">
+          <%= f.check_box :remember_me, class: "self-center mr-2 bg-gray-700"%>
+          <%= f.label :remember_me %>
+        </div>
+      <% end %>
+    <% end %>
+
+    <br>
+    <%= render "users/shared/links" %>
+  </div>
+</div>
